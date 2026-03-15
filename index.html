@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minun Borderi — Sandy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap');
+
+  :root {
+    --cream: #F5F0E8;
+    --dark: #1C1C1C;
+    --mid: #4A4A4A;
+    --light: #8A8A8A;
+    --accent: #8B6F47;
+    --accent-light: #C4A882;
+    --white: #FFFFFF;
+    --border: #E0D8CC;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Raleway', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+    font-weight: 400;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--dark);
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--white);
+    letter-spacing: .08em;
+  }
+  .nav-logo span { color: var(--accent-light); font-style: italic; }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: #aaa;
+    transition: color .2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover { color: var(--accent-light); }
+
+  /* SECTIONS */
+  .section { display: none; min-height: calc(100vh - 64px); }
+  .section.active { display: block; }
+
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 64px);
+  }
+  .hero-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(15%);
+    display: block;
+  }
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem;
+    background: var(--dark);
+    color: var(--white);
+  }
+  .hero-eyebrow {
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 1.5rem;
+  }
+  .hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  .hero-content h1 em {
+    font-style: italic;
+    color: var(--accent-light);
+  }
+  .hero-content p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #bbb;
+    max-width: 380px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-tags { display: flex; gap: .8rem; flex-wrap: wrap; }
+  .tag {
+    padding: .35rem 1rem;
+    border: 1px solid #444;
+    border-radius: 2px;
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #aaa;
+    font-weight: 500;
+  }
+  .divider-line {
+    width: 40px; height: 2px;
+    background: var(--accent-light);
+    margin-bottom: 2rem;
+  }
+
+  /* HISTORIA */
+  #historia { padding: 6rem 3rem; background: var(--cream); }
+  .historia-inner { max-width: 900px; margin: 0 auto; }
+  .section-header { margin-bottom: 4rem; }
+  .section-eyebrow {
+    font-size: .72rem; font-weight: 600;
+    letter-spacing: .25em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: .8rem;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--dark);
+    line-height: 1.2;
+  }
+  .historia-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .h-card {
+    background: var(--white);
+    padding: 2rem;
+    border-top: 2px solid var(--accent);
+  }
+  .h-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--border);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: .8rem;
+  }
+  .h-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: .8rem;
+    color: var(--dark);
+  }
+  .h-card p { font-size: .9rem; line-height: 1.8; color: var(--mid); font-weight: 300; }
+
+  /* GALLERIA */
+  #galleria { padding: 6rem 3rem; background: var(--dark); }
+  .galleria-inner { max-width: 1100px; margin: 0 auto; }
+  #galleria .section-eyebrow { color: var(--accent-light); }
+  #galleria .section-header h2 { color: var(--white); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 8px;
+  }
+  .gallery-item {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    aspect-ratio: 1;
+  }
+  .gallery-item.featured {
+    grid-column: span 2;
+    grid-row: span 2;
+    aspect-ratio: auto;
+  }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; filter: grayscale(10%); }
+  .gallery-item:hover img { transform: scale(1.04); }
+  .gallery-item .overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,.45);
+    opacity: 0; transition: opacity .3s;
+    display: flex; align-items: flex-end; padding: 1.2rem;
+  }
+  .gallery-item:hover .overlay { opacity: 1; }
+  .overlay span { color: white; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; }
+  .ph { width: 100%; height: 100%; min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5rem; color: #555; }
+  .ph-icon { font-size: 2rem; }
+  .ph-label { font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: #666; }
+  .ph-1 { background: #2a2a2a; }
+  .ph-2 { background: #252525; }
+  .ph-3 { background: #2e2e2e; }
+  .ph-4 { background: #272727; }
+  .ph-5 { background: #232323; }
+
+  /* SANDY */
+  #sandy { padding: 6rem 3rem; background: var(--white); }
+  .sandy-inner {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .sandy-img-wrap { position: relative; }
+  .sandy-img {
+    width: 100%; aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(10%);
+  }
+  .sandy-img-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: -12px; right: -12px;
+    width: 100%; height: 100%;
+    border: 2px solid var(--accent-light);
+    z-index: -1;
+  }
+  .sandy-content .section-eyebrow { color: var(--accent); }
+  .sandy-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .sandy-content h2 em { font-style: italic; color: var(--accent); }
+  .sandy-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem; margin: 2rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 0;
+  }
+  .s-stat .s-label { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--light); margin-bottom: .3rem; }
+  .s-stat .s-val { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--dark); }
+  .sandy-content p { font-size: .95rem; line-height: 1.9; color: var(--mid); font-weight: 300; }
+
+  /* LIGHTBOX */
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 999; align-items: center; justify-content: center; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 88vh; display: block; }
+  .lightbox-close { position: absolute; top: 1.5rem; right: 2rem; font-size: 1.5rem; color: #aaa; cursor: pointer; font-family: 'Raleway', sans-serif; letter-spacing: .1em; font-weight: 300; }
+
+  footer {
+    background: var(--dark); color: #555;
+    text-align: center; padding: 2rem;
+    font-size: .75rem; letter-spacing: .15em; text-transform: uppercase;
+  }
+  footer em { color: var(--accent-light); font-style: normal; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Minun <span>Borderi</span></div>
+  <div class="nav-links">
+    <a onclick="show('etusivu')">Etusivu</a>
+    <a onclick="show('historia')">Historia</a>
+    <a onclick="show('galleria')">Galleria</a>
+    <a onclick="show('sandy')">Sandy</a>
+  </div>
+</nav>
+
+<!-- ETUSIVU -->
+<section class="section active" id="etusivu">
+  <div class="hero">
+    <img id="heroImg" class="hero-img" src="https://res.cloudinary.com/du228aaal/image/upload/v1773598373/Sandy_eva91n.jpg" alt="Sandy">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Borderterrieri</div>
+      <div class="divider-line"></div>
+      <h1>Hei,<br>olen <em>Sandy.</em></h1>
+      <p>Tervetuloa borderterieriharrastajan sivulle. Täältä löydät tietoa rakkaasta rodustamme sekä tarinoita elämästä 8-vuotiaan borderterrieri-naaraani kanssa.</p>
+      <div class="hero-tags">
+        <span class="tag">Borderterrieri</span>
+        <span class="tag">8 vuotta</span>
+        <span class="tag">Naaras</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORIA -->
+<section class="section" id="historia">
+  <div class="historia-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">Rotukuvaus</div>
+      <h2>Borderterierin historia</h2>
+    </div>
+    <div class="historia-grid">
+      <div class="h-card">
+        <div class="h-card-num">01</div>
+        <h3>Alkuperä Englannissa</h3>
+        <p>Borderterrieri on yksi Britannian vanhimmista terrieriroduista. Rotu kehitettiin Cheviot-vuoriston alueella Englannin ja Skotlannin rajaseudulla — sieltä tulee myös nimi "border". Rodun historia ulottuu 1700-luvulle asti.</p>
+      </div>
+      <div class="h-card">
+        <div class="h-card-num">02</div>
+        <h3>Ketunmetsästyksen mestari</h3>
+        <p>Borderit jalostettiin alun perin ketunmetsästykseen hevosratsastajien seurassa. Niiden tuli olla tarpeeksi pieniä mahtumaan ketun koloon, mutta tarpeeksi vahvoja pysyäkseen hevosten tahdissa pitkillä ajoilla.</p>
+      </div>
+      <div class="h-card">
+        <div class="h-card-num">03</div>
+        <h3>Virallinen tunnustus</h3>
+        <p>The Kennel Club tunnusti borderterierin virallisesti omaksi rodukseen vuonna 1920. Rotu on säilyttänyt alkuperäisen luonteensa poikkeuksellisen hyvin, sillä se on aina jalostettu ensisijaisesti työkoiraksi.</p>
+      </div>
+      <div class="h-card">
+        <div class="h-card-num">04</div>
+        <h3>Luonne</h3>
+        <p>Borderterrieri on energinen, utelias ja erittäin ystävällinen koira. Se vaatii paljon liikuntaa ja henkistä aktivointia. Älykkäänä ja laumasieluisena se viihtyy parhaiten ihmisten seurassa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERIA -->
+<section class="section" id="galleria">
+  <div class="galleria-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">Kuvat</div>
+      <h2 style="color:white">Galleria</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item featured" onclick="openLightbox(this)">
+        <img id="galleryMainImg" src="https://res.cloudinary.com/du228aaal/image/upload/v1773598373/Sandy_eva91n.jpg" alt="Sandy">
+        <div class="overlay"><span>Sandy rentoutumassa</span></div>
+      </div>
+      <div class="gallery-item"><div class="ph ph-1"><div class="ph-icon">🌿</div><div class="ph-label">Metsäretki</div></div></div>
+      <div class="gallery-item"><div class="ph ph-2"><div class="ph-icon">🎾</div><div class="ph-label">Leikkiaika</div></div></div>
+      <div class="gallery-item"><div class="ph ph-3"><div class="ph-icon">😴</div><div class="ph-label">Lepohetki</div></div></div>
+      <div class="gallery-item"><div class="ph ph-4"><div class="ph-icon">🐾</div><div class="ph-label">Seikkailu</div></div></div>
+      <div class="gallery-item"><div class="ph ph-5"><div class="ph-icon">❤️</div><div class="ph-label">Arki</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SANDY -->
+<section class="section" id="sandy">
+  <div class="sandy-inner">
+    <div class="sandy-img-wrap">
+      <img id="sandyImg" class="sandy-img" src="https://res.cloudinary.com/du228aaal/image/upload/v1773598373/Sandy_eva91n.jpg" alt="Sandy">
+    </div>
+    <div class="sandy-content">
+      <div class="section-eyebrow">Borderterrieri</div>
+      <h2>Meet <em>Sandy.</em></h2>
+      <div class="sandy-stats">
+        <div class="s-stat"><div class="s-label">Nimi</div><div class="s-val">Sandy</div></div>
+        <div class="s-stat"><div class="s-label">Ikä</div><div class="s-val">8 vuotta</div></div>
+        <div class="s-stat"><div class="s-label">Sukupuoli</div><div class="s-val">Naaras</div></div>
+        <div class="s-stat"><div class="s-label">Rotu</div><div class="s-val">Borderterrieri</div></div>
+      </div>
+      <p>Sandy on 8-vuotias borderterrieri-naaras, joka elää täysillä joka päivä. Hän on viisas, rakastava ja täynnä persoonallisuutta — kuten kunnon borderilla kuuluukin olla. Sandyn lempipaikkoja ovat sohva, metsäpolut ja omistajansa kainalot.</p>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-close" onclick="closeLightbox()">Sulje ✕</div>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<footer>© Minun Borderi &nbsp;—&nbsp; <em>Sandy</em></footer>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  function openLightbox(el) {
+    const img = el.querySelector('img');
+    if (!img) return;
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+</script>
+</body>
+</html>
