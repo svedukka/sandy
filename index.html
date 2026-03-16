@@ -258,6 +258,80 @@
     font-size: .75rem; letter-spacing: .15em; text-transform: uppercase;
   }
   footer em { color: var(--accent-light); font-style: normal; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-logo { font-size: 1rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: .7rem; }
+
+    .hero { grid-template-columns: 1fr; }
+    .hero-img { display: none; }
+    .hero-content { padding: 2rem; }
+    .hero-content h1 { font-size: 2.5rem; }
+    .hero-content p { font-size: .9rem; max-width: none; }
+
+    .section-header h2 { font-size: 2rem; }
+    #historia { padding: 3rem 1.5rem; }
+    .historia-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .h-card { padding: 1.5rem; }
+    .h-card-num { font-size: 2.5rem; }
+    .h-card h3 { font-size: 1rem; }
+
+    #galleria { padding: 3rem 1.5rem; }
+    .gallery-grid { grid-template-columns: 1fr; gap: 6px; }
+    .gallery-item.featured { grid-column: span 1; grid-row: span 1; }
+
+    #sandy { padding: 3rem 1.5rem; }
+    .sandy-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .sandy-content h2 { font-size: 2rem; }
+    .sandy-img-wrap::after { bottom: -8px; right: -8px; }
+
+    .ph { min-height: 120px; }
+    .ph-icon { font-size: 1.5rem; }
+    .ph-label { font-size: .6rem; }
+
+    .lightbox img { max-width: 95vw; max-height: 90vh; }
+    .lightbox-close { font-size: 1.2rem; top: 1rem; right: 1rem; }
+
+    footer { font-size: .65rem; padding: 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    nav { padding: .8rem 1rem; }
+    .nav-logo { font-size: .9rem; }
+    .nav-links { gap: .7rem; }
+
+    .hero-content { padding: 1.5rem; }
+    .hero-content h1 { font-size: 1.8rem; line-height: 1.2; }
+    .hero-eyebrow { font-size: .65rem; margin-bottom: 1rem; }
+    .divider-line { margin-bottom: 1.5rem; }
+    .hero-content p { font-size: .85rem; margin-bottom: 1.5rem; }
+    .hero-tags { gap: .6rem; }
+    .tag { padding: .3rem .8rem; font-size: .65rem; }
+
+    .section-header h2 { font-size: 1.5rem; }
+    .section-eyebrow { font-size: .65rem; }
+    #historia { padding: 2rem 1rem; }
+    .historia-grid { gap: .8rem; }
+    .h-card { padding: 1rem; }
+    .h-card-num { font-size: 2rem; }
+    .h-card h3 { font-size: .95rem; }
+    .h-card p { font-size: .8rem; }
+
+    #galleria { padding: 2rem 1rem; }
+    .ph { min-height: 100px; }
+    .ph-icon { font-size: 1.2rem; }
+
+    #sandy { padding: 2rem 1rem; }
+    .sandy-content h2 { font-size: 1.5rem; }
+    .sandy-img-wrap::after { display: none; }
+    .sandy-stats { grid-template-columns: 1fr; gap: .8rem; }
+    .s-stat .s-label { font-size: .6rem; }
+    .s-stat .s-val { font-size: 1rem; }
+    .sandy-content p { font-size: .9rem; }
+  }
 </style>
 </head>
 <body>
